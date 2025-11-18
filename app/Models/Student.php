@@ -13,6 +13,6 @@ class Student extends Model
         'nis',
         'nama_lengkap',
         'jenis_kelamin',
-        'nisn',
+        'nisn', 
     ];
 }
