@@ -15,4 +15,9 @@ class Student extends Model
         'jenis_kelamin',
         'nisn', 
     ];
+
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
+    }
 }
