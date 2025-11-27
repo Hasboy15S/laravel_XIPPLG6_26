@@ -81,6 +81,11 @@
             "php-http/discovery": true
         }
     },
+    "require": {
+    "php": "^8.1",
+    "ext-gd": "*",
+    "simplesoftwareio/simple-qrcode": "^4.2"
+},
     "minimum-stability": "stable",
     "prefer-stable": true
 }

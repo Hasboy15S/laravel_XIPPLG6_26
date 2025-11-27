@@ -20,15 +20,16 @@ class AttendanceController extends Controller
     // simpan absensi
     public function store(Request $request)
     {
+        dd($request->all());
         foreach ($request->status as $student_id => $status) {
             Attendance::updateOrCreate(
                 [
                     'student_id' => $student_id,
-                    'tanggal' => $request->tanggal
+                    'date' => $request->tanggal   // kolom di DB: date
                 ],
                 [
                     'status' => $status,
-                    'keterangan' => $request->keterangan[$student_id] ?? null
+                    'description' => $request->keterangan[$student_id] ?? null  // kolom di DB: description
                 ]
             );
         }
@@ -42,9 +43,14 @@ class AttendanceController extends Controller
         $tanggal = $request->tanggal ?? date('Y-m-d');
 
         $absensi = Attendance::with('student')
-                    ->where('tanggal', $tanggal)
+                    ->where('date', $tanggal) // perbaikan: WAS 'tanggal'
                     ->get();
 
         return view('admin.absensi.riwayat', compact('absensi', 'tanggal'));
+        $request->validate([
+    'tanggal' => 'required|date'
+]);
+
     }
+    
 }
